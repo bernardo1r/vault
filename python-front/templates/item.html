@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .container h1 {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 70px; /* Aumentado o espaçamento abaixo do título */
+        }
+
+        .info-field {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px; /* Aumentado o espaçamento abaixo dos campos */
+            position: relative;
+            align-items: center;
+        }
+
+        /* Adicionado margem inferior */
+        label {
+            margin-bottom: 10px;
+        }
+
+        .info-field input {
+            border: none;
+            background: none;
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .button a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .back-button {
+            background-color: #4CAF50;
+            position: absolute;
+            top: 90px; /* Aumentado o espaçamento acima do botão Voltar */
+            left: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+
+        .edit-button {
+            background-color: #808080;
+        }
+
+        .edit-button:hover {
+            background-color: #696969;
+        }
+
+        .delete-button {
+            background-color: #ff0000;
+        }
+
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+
+        .toggle-password, .copy-field {
+            background-color: #ddd;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 0.8em;
+            text-align: center;
+            margin-left: 10px;
+        }
+
+        .toggle-password:hover, .copy-field:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{item.label}}</h1>
+        <button class="button back-button"><a href="{{index_url}}">Back</a></button>
+        <div>
+            <label>User</label>
+            <div class="info-field">
+                <input type="text" id="username" readonly value="{{item.username}}">
+                <div>
+                    <button class="copy-field" onclick="copyToClipboard('username')">Copy</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label>Password</label>
+            <div class="info-field">
+                <input type="password" id="password" readonly value="{{item.password}}">
+                <div>
+                    <button class="toggle-password" onclick="togglePassword('password')">Show</button>
+                    <button class="copy-field" onclick="copyToClipboard('password')">Copy</button>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="button delete-button"><a href="/item/delete?id={{item.id}}">Delete</a></button>
+            <button class="button edit-button"><a href="/item/edit?id={{item.id}}">Edit</a></button>
+        </div>
+    </div>
+    <script>
+        function togglePassword(id) {
+            var passwordField = document.getElementById(id);
+            passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+            var toggleButton = passwordField.nextSibling;
+            toggleButton.innerText = passwordField.type === 'password' ? 'Show' : 'Hide';
+        }
+
+        function copyToClipboard(id) {
+            var copyField = document.getElementById(id);
+            copyField.select();
+            copyField.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+        }
+    </script>
+</body>
+</html>

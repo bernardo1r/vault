@@ -1,0 +1,4 @@
+*.pem
+backend/client_certs.json
+backend/vendor/
+__pycache__/

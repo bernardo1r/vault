@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Success</title>
+            <style>
+        /* Shared CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .form-field label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-field input {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .form-field input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .form-field input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Login Success CSS styles */
+        .success-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-container h1 {
+            text-align: center;
+        }
+
+        .success-container p {
+            margin-bottom: 10px;
+        }
+
+        .success-container img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .success-container button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container success-container">
+        <h1>Credentials Created Successfully!</h1>
+        <p>2 step authentication QR Code:</p>
+        <img src="data:image/png;base64,{{qr_code}}" alt="QR Code">
+        <p>
+            <button onclick="location.href='{{login_url}}'">Go to Login</button>
+        </p>
+    </div>
+</body>
+</html>

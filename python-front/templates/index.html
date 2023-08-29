@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .container ul {
+            margin-bottom: 20px;
+            padding: 0;
+        }
+
+        .container li {
+            list-style-type: none;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .container li:hover {
+            background-color: #ebebeb;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .button-container button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+
+        .button-container button a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .button-container .exit-button {
+            background-color: #ff0000;
+        }
+
+        .button-container .exit-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Item List</h1>
+        <div class="button-container">
+            <button class="exit-button"><a href="/logout">Logout</a></button>
+            <button><a href="/item/create">Create Item</a></button>
+        </div>
+        <ul>
+            {% for item in index %}
+            <li onclick="window.location.href='/item?id={{item["id"]}}';">
+                {{item["label"]}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

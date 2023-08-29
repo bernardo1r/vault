@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authenticator Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .form-field label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-field input {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .form-field input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .form-field input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Authenticator Code</h1>
+        <p class="message">Hello, {{username}}</p>
+        <p class="message">please provide your authenticator code:</p></p>
+        {% if error %}
+            <p class="error-message">Incorrect code</p>
+        {% endif %}
+        <form method="POST" action="{{authenticator_url}}">
+            <div class="form-field">
+                <label for="passcode">Authenticator Code:</label>
+                <input type="text" id="passcode" name="passcode" required>
+            </div>
+            <div class="form-field">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
