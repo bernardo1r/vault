@@ -8,7 +8,8 @@ import base64
 import hashlib
 import requests
 
-from crypto import SERVER_CERT, CLIENT_CERT
+from crypto import CLIENT_CERT
+from comm import verify_cert
 
 class User:
     KEYPAIR_BITS: int = 2048
@@ -149,6 +150,7 @@ class User:
             cert=CLIENT_CERT,
             verify=False
         )
+        verify_cert(endpoint)
 
         return response
 
@@ -163,6 +165,7 @@ class User:
             cert=CLIENT_CERT,
             verify=False
         )
+        verify_cert(endpoint)
         if response.status_code == 200:
             return True
 
@@ -180,6 +183,7 @@ class User:
             cert=CLIENT_CERT,
             verify=False
         )
+        verify_cert(endpoint)
         if response.status_code != 200:
             return False
 

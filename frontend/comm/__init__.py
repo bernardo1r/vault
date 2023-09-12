@@ -1,2 +1,2 @@
-from .request_signed import RequestSigned
+from .request_signed import RequestSigned, verify_cert
 from .item import Item

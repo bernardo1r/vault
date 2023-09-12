@@ -7,9 +7,19 @@ from Cryptodome.Signature import pss
 from Cryptodome.Hash import SHA3_256
 import base64
 import requests
+import ssl
 
 from crypto import SERVER_CERT, CLIENT_CERT
 
+
+def verify_cert(url: str):
+    url = url.split("/")[-2]
+    url, port = url.split(":")
+    try:
+        server_cert = ssl.get_server_certificate((url, port), ca_certs=SERVER_CERT)
+    except ssl.SSLCertVerificationError:
+        print("invalid server certificate", file=sys.stderr) 
+        os.exit(1)
 
 class RequestSigned:
     method: str
@@ -66,6 +76,7 @@ class RequestSigned:
         for key, value in self.query.items():
             url += f"{key}={value}"
 
+        verify_cert(url)
         return requests.request(
             method=self.method,
             url=url,
@@ -74,3 +85,4 @@ class RequestSigned:
             cert=CLIENT_CERT,
             verify=False
         )
+
