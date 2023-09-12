@@ -1,0 +1,7 @@
+Flask
+pycryptodomex
+argon2-cffi
+pyotp
+requests
+Pillow
+qrcode[pil]

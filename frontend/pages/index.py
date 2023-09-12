@@ -27,6 +27,9 @@ def index():
         user=user.email, body=""
     )
     response = req.request(user.private_key_sign)
+    if response.status_code != 200:
+        return redirect("/logout")
+
     return render_template(
         "index.html",
         index=response.json()

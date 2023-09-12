@@ -1,0 +1,48 @@
+version: "3"
+services:
+    db:
+        build:
+            dockerfile: "db.Dockerfile"
+            context: "."
+        environment:
+            POSTGRES_PASSWORD: "test"
+        networks:
+            - "net"
+        volumes:
+            - "db_data:/var/lib/postgresql/data"
+
+    backend:
+        build:
+            dockerfile: "backend.Dockerfile"
+            context: "."
+        environment:
+            DATABASE_URL: "postgres://postgres:test@db:5432/"
+        networks:
+            - "net"
+        depends_on:
+            - "db"
+        working_dir: "/home/backend/"
+        command: "./backend 0.0.0.0:1111 cert.pem key.pem client_certs.json"
+
+    frontend:
+        build:
+            dockerfile: "frontend.Dockerfile"
+            context: "."
+        environment:
+            API_ADDR: "backend:1111"
+            FLASK_RUN_HOST: "0.0.0.0"
+            FLASK_RUN_PORT: 5000
+        ports:
+            - "127.0.0.1:5000:5000"
+        networks:
+            - "net"
+        depends_on:
+            - "backend"
+        working_dir: "/home/frontend/"
+        command: "python3 app.py"
+
+networks:
+    net:
+
+volumes:
+    db_data:
