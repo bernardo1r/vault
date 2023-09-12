@@ -13,7 +13,7 @@ And to generate the client certificate:
 openssl req -newkey rsa:4096 -x509 -sha256 -nodes -out cert/frontend/cert.pem -keyout cert/frontend/key.pem
 ```
 
-## Running the locally
+## Running locally
 Run Docker Compose:
 ```bash
 docker-compose up
